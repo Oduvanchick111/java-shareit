@@ -15,4 +15,6 @@ public interface ItemRepoInterface {
     Collection<ItemDao> getItemByUserId(Long ownerId);
 
     Collection<ItemDao> getItemOnText(Long ownerId, String text);
+
+    void deleteAllItems();
 }

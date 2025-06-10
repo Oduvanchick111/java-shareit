@@ -36,6 +36,12 @@ public class UserController {
         userService.deleteUser(userId);
     }
 
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAllUsers() {
+        userService.deleteAllUsers();
+    }
+
     @PatchMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public UserResponseDto updateUser(@PathVariable Long userId, @Valid @RequestBody UserRequestDtoForUpdate userRequestDtoForUpdate) {

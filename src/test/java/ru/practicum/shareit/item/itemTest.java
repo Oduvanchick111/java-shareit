@@ -21,6 +21,8 @@ public class itemTest {
 
     @BeforeEach
     public void setUp() throws Exception {
+        mockMvc.perform(delete("/items"));
+        mockMvc.perform(delete("/users"));
         String userJson = """
                 {
                     "email": "pavelboltinskiy@gmail.com",

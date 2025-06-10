@@ -47,6 +47,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public void deleteAll() {
+        users.clear();
+    }
+
+    @Override
     public boolean existsByEmail(String email) {
         return findAll().stream().anyMatch(userDao -> email.equals(userDao.getEmail()));
     }

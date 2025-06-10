@@ -58,6 +58,11 @@ public class ItemRepoImpl implements ItemRepoInterface {
                 .toList();
     }
 
+    @Override
+    public void deleteAllItems() {
+        allItems.clear();
+    }
+
     private Long getNextId() {
         Collection<ItemDao> items = allItems.values();
         return items.isEmpty() ? 1L : items.stream()

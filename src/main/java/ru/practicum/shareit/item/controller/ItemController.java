@@ -47,4 +47,10 @@ public class ItemController {
     public Collection<ItemResponseDto> getItemByText(@RequestHeader("X-Sharer-User-Id") Long ownerId, @RequestParam String text) {
         return itemService.getItemOnText(ownerId, text);
     }
+
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAllItems() {
+        itemService.deleteAllItems();
+    }
 }

@@ -69,4 +69,9 @@ public class ItemServiceImpl implements ItemService {
                 .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
         return itemRepo.getItemOnText(userId, text).stream().map(ItemMapper::toItemResponseDto).toList();
     }
+
+    @Override
+    public void deleteAllItems() {
+        userRepository.deleteAll();
+    }
 }

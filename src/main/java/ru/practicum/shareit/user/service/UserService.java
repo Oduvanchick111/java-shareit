@@ -16,4 +16,6 @@ public interface UserService {
     UserResponseDto updateUser(Long userId, UserRequestDtoForUpdate userRequestDtoForUpdate);
 
     void deleteUser(Long userId);
+
+    void deleteAllUsers();
 }

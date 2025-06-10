@@ -16,4 +16,6 @@ public interface ItemService {
     Collection<ItemResponseDto> getItemsByUserId(Long ownerId);
 
     Collection<ItemResponseDto> getItemOnText(Long userId, String text);
+
+    void deleteAllItems();
 }
