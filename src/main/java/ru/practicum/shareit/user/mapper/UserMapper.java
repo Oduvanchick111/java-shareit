@@ -1,11 +1,14 @@
 package ru.practicum.shareit.user.mapper;
 
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.user.dto.UserRequestDto;
 import ru.practicum.shareit.user.dto.UserRequestDtoForUpdate;
 import ru.practicum.shareit.user.dto.UserResponseDto;
 import ru.practicum.shareit.user.model.UserDao;
 
+
+@UtilityClass
 public class UserMapper {
     public static UserResponseDto toUserResponseDto(UserDao userDao) {
         return UserResponseDto.builder()

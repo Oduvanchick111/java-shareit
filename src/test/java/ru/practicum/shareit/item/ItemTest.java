@@ -11,10 +11,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.practicum.shareit.item.controller.ItemController.X_SHARER_USER_ID_HEADER;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class itemTest {
+public class ItemTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,7 +43,7 @@ public class itemTest {
                 }
                 """;
         mockMvc.perform(post("/items")
-                        .header("X-Sharer-User-Id", userId)
+                        .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(itemJson))
                 .andExpect(status().isCreated());
@@ -50,7 +51,7 @@ public class itemTest {
 
     @Test
     public void testGetItem() throws Exception {
-        mockMvc.perform(get("/items/1").header("X-Sharer-User-Id", 1L))
+        mockMvc.perform(get("/items/1").header(X_SHARER_USER_ID_HEADER, 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("iphone"));
@@ -67,7 +68,7 @@ public class itemTest {
                 }
                 """;
         mockMvc.perform(post("/items")
-                        .header("X-Sharer-User-Id", userId)
+                        .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(itemJson))
                 .andExpect(status().isBadRequest());
@@ -82,12 +83,12 @@ public class itemTest {
                 }
                 """;
         mockMvc.perform(patch("/items/1")
-                        .header("X-Sharer-User-Id", userId)
+                        .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(itemJson))
                 .andExpect(status().isOk());
 
-        mockMvc.perform(get("/items/1").header("X-Sharer-User-Id", 1L))
+        mockMvc.perform(get("/items/1").header(X_SHARER_USER_ID_HEADER, 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.description").value("15"));
@@ -104,7 +105,7 @@ public class itemTest {
                 }
                 """;
         mockMvc.perform(post("/items")
-                        .header("X-Sharer-User-Id", userId)
+                        .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(itemJson))
                 .andExpect(status().isCreated());
@@ -112,7 +113,7 @@ public class itemTest {
         String text = "классный";
 
         mockMvc.perform(get("/items/search")
-                        .header("X-Sharer-User-Id", userId)
+                        .header(X_SHARER_USER_ID_HEADER, userId)
                         .param("text", text))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("iphone16"));

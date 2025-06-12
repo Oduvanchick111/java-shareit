@@ -19,7 +19,6 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public Collection<UserResponseDto> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -31,25 +30,21 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
     }
 
     @DeleteMapping()
-    @ResponseStatus(HttpStatus.OK)
     public void deleteAllUsers() {
         userService.deleteAllUsers();
     }
 
     @PatchMapping("/{userId}")
-    @ResponseStatus(HttpStatus.OK)
     public UserResponseDto updateUser(@PathVariable Long userId, @Valid @RequestBody UserRequestDtoForUpdate userRequestDtoForUpdate) {
         return userService.updateUser(userId, userRequestDtoForUpdate);
     }
 
     @GetMapping("/{userId}")
-    @ResponseStatus(HttpStatus.OK)
     public UserResponseDto findUserById(@PathVariable Long userId) {
         return userService.findUserById(userId);
     }

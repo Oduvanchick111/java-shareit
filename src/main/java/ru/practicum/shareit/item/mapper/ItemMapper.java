@@ -1,10 +1,12 @@
 package ru.practicum.shareit.item.mapper;
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.item.dto.ItemRequestDto;
 import ru.practicum.shareit.item.dto.ItemRequestForUpdateDto;
 import ru.practicum.shareit.item.dto.ItemResponseDto;
 import ru.practicum.shareit.item.model.ItemDao;
 
+@UtilityClass
 public class ItemMapper {
 
     public static ItemDao toItemDao(ItemRequestDto itemRequestDto) {

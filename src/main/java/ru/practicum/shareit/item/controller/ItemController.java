@@ -17,39 +17,35 @@ import java.util.Collection;
 public class ItemController {
 
     private final ItemService itemService;
+    public static final String X_SHARER_USER_ID_HEADER = "X-Sharer-User-Id";
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemResponseDto addItem(@RequestHeader("X-Sharer-User-Id") Long userId, @Valid @RequestBody ItemRequestDto itemRequestDto) {
+    public ItemResponseDto addItem(@RequestHeader(X_SHARER_USER_ID_HEADER) Long userId, @Valid @RequestBody ItemRequestDto itemRequestDto) {
         return itemService.saveItem(userId, itemRequestDto);
     }
 
     @PatchMapping("/{itemId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ItemResponseDto updateItem(@RequestHeader("X-Sharer-User-Id") Long ownerId, @PathVariable Long itemId, @Valid @RequestBody ItemRequestForUpdateDto item) {
+    public ItemResponseDto updateItem(@RequestHeader(X_SHARER_USER_ID_HEADER) Long ownerId, @PathVariable Long itemId, @Valid @RequestBody ItemRequestForUpdateDto item) {
         return itemService.updateItem(ownerId, itemId, item);
     }
 
     @GetMapping("/{itemId}")
-    @ResponseStatus(HttpStatus.OK)
-    public ItemResponseDto getItem(@RequestHeader("X-Sharer-User-Id") Long ownerId, @PathVariable Long itemId) {
+    public ItemResponseDto getItem(@RequestHeader(X_SHARER_USER_ID_HEADER) Long ownerId, @PathVariable Long itemId) {
         return itemService.getItemById(ownerId, itemId);
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public Collection<ItemResponseDto> getItemsByUserId(@RequestHeader("X-Sharer-User-Id") Long ownerId) {
+    public Collection<ItemResponseDto> getItemsByUserId(@RequestHeader(X_SHARER_USER_ID_HEADER) Long ownerId) {
         return itemService.getItemsByUserId(ownerId);
     }
 
     @GetMapping("/search")
-    @ResponseStatus(HttpStatus.OK)
-    public Collection<ItemResponseDto> getItemByText(@RequestHeader("X-Sharer-User-Id") Long ownerId, @RequestParam String text) {
+    public Collection<ItemResponseDto> getItemByText(@RequestHeader(X_SHARER_USER_ID_HEADER) Long ownerId, @RequestParam String text) {
         return itemService.getItemOnText(ownerId, text);
     }
 
     @DeleteMapping()
-    @ResponseStatus(HttpStatus.OK)
     public void deleteAllItems() {
         itemService.deleteAllItems();
     }
