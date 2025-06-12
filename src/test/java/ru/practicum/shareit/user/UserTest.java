@@ -23,13 +23,14 @@ public class UserTest {
     @BeforeEach
     public void setUp() throws Exception {
         mockMvc.perform(delete("/users"));
-
+        // CHECKSTYLE:OFF
         String userJson = """
                 {
                     "email": "pavelboltinskiy@gmail.com",
                     "name": "Pasha"
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
                 .andExpect(status().isCreated());
@@ -54,11 +55,13 @@ public class UserTest {
 
     @Test
     public void testUpdateUser() throws Exception {
+        // CHECKSTYLE:OFF
         String userJson = """
                 {
                     "name": "NePasha"
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(patch("/users/1").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
                 .andExpect(status().isOk())
@@ -67,12 +70,14 @@ public class UserTest {
 
     @Test
     public void testCreateUserWithWrongEmail() throws Exception {
+        // CHECKSTYLE:OFF
         String userJson = """
                 {
                     "email": "padsadsa",
                     "name": "Pasha"
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
                 .andExpect(status().isBadRequest());
@@ -80,12 +85,14 @@ public class UserTest {
 
     @Test
     public void testCreateUserWithSameEmail() throws Exception {
+        // CHECKSTYLE:OFF
         String userJson = """
                 {
                     "email": "pavelboltinskiy@gmail.com",
                     "name": "NePasha"
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
                 .andExpect(status().isConflict());

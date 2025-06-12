@@ -24,17 +24,20 @@ public class ItemTest {
     public void setUp() throws Exception {
         mockMvc.perform(delete("/items"));
         mockMvc.perform(delete("/users"));
+        // CHECKSTYLE:OFF
         String userJson = """
                 {
                     "email": "pavelboltinskiy@gmail.com",
                     "name": "Pasha"
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
                 .andExpect(status().isCreated());
 
         Long userId = 1L;
+        // CHECKSTYLE:OFF
         String itemJson = """
                 {
                     "name": "iphone",
@@ -42,6 +45,7 @@ public class ItemTest {
                     "available": true
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(post("/items")
                         .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -60,6 +64,7 @@ public class ItemTest {
     @Test
     public void testCreateItemWithWrongParams() throws Exception {
         Long userId = 1L;
+        // CHECKSTYLE:OFF
         String itemJson = """
                 {
                     "name": "",
@@ -67,6 +72,7 @@ public class ItemTest {
                     "available": true
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(post("/items")
                         .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -77,11 +83,13 @@ public class ItemTest {
     @Test
     public void testUpdateItem() throws Exception {
         Long userId = 1L;
+        // CHECKSTYLE:OFF
         String itemJson = """
                 {
                     "description": "15"
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(patch("/items/1")
                         .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -97,6 +105,7 @@ public class ItemTest {
     @Test
     public void testGetItemByText() throws Exception {
         Long userId = 1L;
+        // CHECKSTYLE:OFF
         String itemJson = """
                 {
                     "name": "iphone16",
@@ -104,6 +113,7 @@ public class ItemTest {
                     "available": true
                 }
                 """;
+        // CHECKSTYLE:ON
         mockMvc.perform(post("/items")
                         .header(X_SHARER_USER_ID_HEADER, userId)
                         .contentType(MediaType.APPLICATION_JSON)
