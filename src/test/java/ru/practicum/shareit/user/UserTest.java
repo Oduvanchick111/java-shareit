@@ -25,10 +25,8 @@ public class UserTest {
         mockMvc.perform(delete("/users"));
 
         String userJson = """
-                {
-                    "email": "pavelboltinskiy@gmail.com",
-                    "name": "Pasha"
-                }
+                { "email": "pavelboltinskiy@gmail.com",
+                  "name": "Pasha" }
                 """;
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
@@ -55,9 +53,7 @@ public class UserTest {
     @Test
     public void testUpdateUser() throws Exception {
         String userJson = """
-                {
-                    "name": "NePasha"
-                }
+                { "name": "NePasha" }
                 """;
         mockMvc.perform(patch("/users/1").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
@@ -68,10 +64,8 @@ public class UserTest {
     @Test
     public void testCreateUserWithWrongEmail() throws Exception {
         String userJson = """
-                {
-                    "email": "padsadsa",
-                    "name": "Pasha"
-                }
+                { "email": "padsadsa",
+                  "name": "Pasha" }
                 """;
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
@@ -81,10 +75,8 @@ public class UserTest {
     @Test
     public void testCreateUserWithSameEmail() throws Exception {
         String userJson = """
-                {
-                    "email": "pavelboltinskiy@gmail.com",
-                    "name": "NePasha"
-                }
+                { "email": "pavelboltinskiy@gmail.com",
+                  "name": "NePasha" }
                 """;
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))

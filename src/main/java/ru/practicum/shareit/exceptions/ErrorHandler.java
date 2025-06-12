@@ -1,10 +1,10 @@
 package ru.practicum.shareit.exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.client.HttpServerErrorException;
 
 @RestControllerAdvice
 public class ErrorHandler {
@@ -14,7 +14,7 @@ public class ErrorHandler {
         return new ErrorResponse("Объект не найден", exception.getMessage());
     }
 
-    @ExceptionHandler(ValidateException.class)
+    @ExceptionHandler({MethodArgumentNotValidException.class, ValidateException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidateException(final ValidateException exception) {
         return new ErrorResponse("Ошибка валидации", exception.getMessage());
