@@ -25,8 +25,10 @@ public class ItemTest {
         mockMvc.perform(delete("/items"));
         mockMvc.perform(delete("/users"));
         String userJson = """
-                { "email": "pavelboltinskiy@gmail.com",
-                  "name": "Pasha" }
+                {
+                    "email": "pavelboltinskiy@gmail.com",
+                    "name": "Pasha"
+                }
                 """;
         mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
@@ -34,9 +36,11 @@ public class ItemTest {
 
         Long userId = 1L;
         String itemJson = """
-                { "name": "iphone",
-                 "description": "16",
-                 "available": true }
+                {
+                    "name": "iphone",
+                    "description": "16",
+                    "available": true
+                }
                 """;
         mockMvc.perform(post("/items")
                         .header(X_SHARER_USER_ID_HEADER, userId)
@@ -57,9 +61,11 @@ public class ItemTest {
     public void testCreateItemWithWrongParams() throws Exception {
         Long userId = 1L;
         String itemJson = """
-                { "name": "",
-                  "description": "16",
-                  "available": true }
+                {
+                    "name": "",
+                    "description": "16",
+                    "available": true
+                }
                 """;
         mockMvc.perform(post("/items")
                         .header(X_SHARER_USER_ID_HEADER, userId)
@@ -72,7 +78,9 @@ public class ItemTest {
     public void testUpdateItem() throws Exception {
         Long userId = 1L;
         String itemJson = """
-                { "description": "15" }
+                {
+                    "description": "15"
+                }
                 """;
         mockMvc.perform(patch("/items/1")
                         .header(X_SHARER_USER_ID_HEADER, userId)
@@ -90,9 +98,11 @@ public class ItemTest {
     public void testGetItemByText() throws Exception {
         Long userId = 1L;
         String itemJson = """
-                { "name": "iphone16",
-                  "description": "классный айфончик",
-                  "available": true }
+                {
+                    "name": "iphone16",
+                    "description": "классный айфончик",
+                    "available": true
+                }
                 """;
         mockMvc.perform(post("/items")
                         .header(X_SHARER_USER_ID_HEADER, userId)
