@@ -4,13 +4,13 @@ import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.item.dto.ItemRequestDto;
 import ru.practicum.shareit.item.dto.ItemRequestForUpdateDto;
 import ru.practicum.shareit.item.dto.ItemResponseDto;
-import ru.practicum.shareit.item.model.ItemDao;
+import ru.practicum.shareit.item.model.Item;
 
 @UtilityClass
 public class ItemMapper {
 
-    public static ItemDao toItemDao(ItemRequestDto itemRequestDto) {
-        return ItemDao.builder()
+    public static Item toItemDao(ItemRequestDto itemRequestDto) {
+        return Item.builder()
                 .name(itemRequestDto.getName())
                 .description(itemRequestDto.getDescription())
                 .available(itemRequestDto.getAvailable())
@@ -19,8 +19,8 @@ public class ItemMapper {
                 .build();
     }
 
-    public static ItemDao toItemDaoUpdate(ItemRequestForUpdateDto itemRequestDto) {
-        return ItemDao.builder()
+    public static Item toItemDaoUpdate(ItemRequestForUpdateDto itemRequestDto) {
+        return Item.builder()
                 .name(itemRequestDto.getName())
                 .description(itemRequestDto.getDescription())
                 .available(itemRequestDto.getAvailable())
@@ -29,14 +29,14 @@ public class ItemMapper {
                 .build();
     }
 
-    public static ItemResponseDto toItemResponseDto(ItemDao itemDao) {
+    public static ItemResponseDto toItemResponseDto(Item item) {
         return ItemResponseDto.builder()
-                .id(itemDao.getId())
-                .name(itemDao.getName())
-                .description(itemDao.getDescription())
-                .available(itemDao.getAvailable())
-                .requestId(itemDao.getRequestId())
-                .ownerId(itemDao.getOwnerId())
+                .id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .available(item.getAvailable())
+                .requestId(item.getRequestId())
+                .ownerId(item.getOwnerId())
                 .build();
     }
 }

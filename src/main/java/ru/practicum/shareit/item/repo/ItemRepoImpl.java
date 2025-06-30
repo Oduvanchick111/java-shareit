@@ -2,7 +2,7 @@ package ru.practicum.shareit.item.repo;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
-import ru.practicum.shareit.item.model.ItemDao;
+import ru.practicum.shareit.item.model.Item;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,19 +11,19 @@ import java.util.stream.Collectors;
 @Data
 public class ItemRepoImpl implements ItemRepoInterface {
 
-    private final Map<Long, ItemDao> allItems = new HashMap<>();
+    private final Map<Long, Item> allItems = new HashMap<>();
 
     @Override
-    public ItemDao saveItem(Long ownerId, ItemDao itemDao) {
-        itemDao.setId(getNextId());
-        itemDao.setOwnerId(ownerId);
-        allItems.put(itemDao.getId(), itemDao);
-        return itemDao;
+    public Item saveItem(Long ownerId, Item item) {
+        item.setId(getNextId());
+        item.setOwnerId(ownerId);
+        allItems.put(item.getId(), item);
+        return item;
     }
 
     @Override
-    public ItemDao updateItem(Long itemId, ItemDao item) {
-        ItemDao itemDao = allItems.get(itemId);
+    public Item updateItem(Long itemId, Item item) {
+        Item itemDao = allItems.get(itemId);
         if (item.getName() != null) {
             itemDao.setName(item.getName());
         }
@@ -37,17 +37,17 @@ public class ItemRepoImpl implements ItemRepoInterface {
     }
 
     @Override
-    public Optional<ItemDao> getItemById(Long ownerId, Long itemId) {
+    public Optional<Item> getItemById(Long ownerId, Long itemId) {
         return Optional.ofNullable(allItems.get(itemId));
     }
 
     @Override
-    public Collection<ItemDao> getItemByUserId(Long ownerId) {
+    public Collection<Item> getItemByUserId(Long ownerId) {
         return allItems.values().stream().filter(itemDao -> ownerId.equals(itemDao.getOwnerId())).collect(Collectors.toList());
     }
 
     @Override
-    public Collection<ItemDao> getItemOnText(Long ownerId, String text) {
+    public Collection<Item> getItemOnText(Long ownerId, String text) {
         if (text == null || text.isBlank()) {
             return List.of();
         }
@@ -64,9 +64,9 @@ public class ItemRepoImpl implements ItemRepoInterface {
     }
 
     private Long getNextId() {
-        Collection<ItemDao> items = allItems.values();
+        Collection<Item> items = allItems.values();
         return items.isEmpty() ? 1L : items.stream()
-                .mapToLong(ItemDao::getId)
+                .mapToLong(Item::getId)
                 .max()
                 .orElse(0) + 1;
     }
