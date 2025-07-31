@@ -3,8 +3,9 @@ package ru.practicum.shareit.request.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import lombok.Data;
+import ru.practicum.shareit.user.model.User;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class ItemRequestDto {
@@ -12,7 +13,7 @@ public class ItemRequestDto {
     @NotBlank
     private String description;
     @NotBlank
-    private Long requestorId;
+    private User requestor;
     @Past
-    private LocalDate created;
+    private LocalDateTime created;
 }

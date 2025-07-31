@@ -1,19 +1,19 @@
 package ru.practicum.shareit.user.repo;
 
-import ru.practicum.shareit.user.model.UserDao;
+import ru.practicum.shareit.user.model.User;
 
 import java.util.Collection;
 import java.util.Optional;
 
 
 public interface UserRepository {
-    Collection<UserDao> findAll();
+    Collection<User> findAll();
 
-    UserDao save(UserDao user);
+    User save(User user);
 
-    Optional<UserDao> findUserById(Long id);
+    Optional<User> findUserById(Long id);
 
-    UserDao update(Long userId, UserDao user);
+    User update(Long userId, User user);
 
     void delete(Long userId);
 

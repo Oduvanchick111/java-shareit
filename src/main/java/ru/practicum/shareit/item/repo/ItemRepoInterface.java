@@ -1,20 +1,20 @@
 package ru.practicum.shareit.item.repo;
 
-import ru.practicum.shareit.item.model.ItemDao;
+import ru.practicum.shareit.item.model.Item;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface ItemRepoInterface {
-    ItemDao saveItem(Long ownerId, ItemDao itemDao);
+    Item saveItem(Long ownerId, Item item);
 
-    ItemDao updateItem(Long itemId, ItemDao item);
+    Item updateItem(Long itemId, Item item);
 
-    Optional<ItemDao> getItemById(Long ownerId, Long itemId);
+    Optional<Item> getItemById(Long ownerId, Long itemId);
 
-    Collection<ItemDao> getItemByUserId(Long ownerId);
+    Collection<Item> getItemByUserId(Long ownerId);
 
-    Collection<ItemDao> getItemOnText(Long ownerId, String text);
+    Collection<Item> getItemOnText(Long ownerId, String text);
 
     void deleteAllItems();
 }

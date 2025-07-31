@@ -1,7 +1,7 @@
 package ru.practicum.shareit.user.repo;
 
 import org.springframework.stereotype.Component;
-import ru.practicum.shareit.user.model.UserDao;
+import ru.practicum.shareit.user.model.User;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,28 +10,28 @@ import java.util.Optional;
 
 @Component
 public class UserRepositoryImpl implements UserRepository {
-    private final Map<Long, UserDao> users = new HashMap<>();
+    private final Map<Long, User> users = new HashMap<>();
 
     @Override
-    public Collection<UserDao> findAll() {
+    public Collection<User> findAll() {
         return users.values();
     }
 
     @Override
-    public UserDao save(UserDao user) {
+    public User save(User user) {
         user.setId(getNextId());
         users.put(user.getId(), user);
         return user;
     }
 
     @Override
-    public Optional<UserDao> findUserById(Long id) {
+    public Optional<User> findUserById(Long id) {
         return Optional.ofNullable(users.get(id));
     }
 
     @Override
-    public UserDao update(Long userId, UserDao user) {
-        UserDao existingUser = users.get(userId);
+    public User update(Long userId, User user) {
+        User existingUser = users.get(userId);
         if (user.getEmail() != null) {
             existingUser.setEmail(user.getEmail());
         }
@@ -57,9 +57,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     private Long getNextId() {
-        Collection<UserDao> users = findAll();
+        Collection<User> users = findAll();
         return users.isEmpty() ? 1L : users.stream()
-                .mapToLong(UserDao::getId)
+                .mapToLong(User::getId)
                 .max()
                 .orElse(0) + 1;
     }

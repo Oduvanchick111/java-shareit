@@ -1,5 +1,6 @@
 package ru.practicum.shareit.item.service;
 
+import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemRequestDto;
 import ru.practicum.shareit.item.dto.ItemRequestForUpdateDto;
 import ru.practicum.shareit.item.dto.ItemResponseDto;
@@ -11,11 +12,13 @@ public interface ItemService {
 
     ItemResponseDto updateItem(Long userId, Long itemId, ItemRequestForUpdateDto item);
 
-    ItemResponseDto getItemById(Long userId, Long itemId);
+    ItemResponseDto getById(Long userId, Long itemId);
 
     Collection<ItemResponseDto> getItemsByUserId(Long ownerId);
 
     Collection<ItemResponseDto> getItemOnText(Long userId, String text);
 
     void deleteAllItems();
+
+    CommentDto addComment(Long userId, Long itemId, CommentDto comment);
 }
