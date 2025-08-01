@@ -10,7 +10,7 @@ import ru.practicum.shareit.user.model.User;
 
 @UtilityClass
 public class UserMapper {
-    public static UserResponseDto toUserResponseDto(User user) {
+    public UserResponseDto toUserResponseDto(User user) {
         return UserResponseDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
@@ -18,21 +18,21 @@ public class UserMapper {
                 .build();
     }
 
-    public static User toUserDao(UserRequestDto userDto) {
+    public User toUserDao(UserRequestDto userDto) {
         return User.builder()
                 .email(userDto.getEmail())
                 .name(userDto.getName())
                 .build();
     }
 
-    public static User toUserDaoUpdate(UserRequestDtoForUpdate userDto) {
+    public User toUserDaoUpdate(UserRequestDtoForUpdate userDto) {
         return User.builder()
                 .email(userDto.getEmail())
                 .name(userDto.getName())
                 .build();
     }
 
-    public static UserRequestDto toUserRequestDto(User user) {
+    public UserRequestDto toUserRequestDto(User user) {
         return UserRequestDto.builder()
                 .email(user.getEmail())
                 .name(user.getName())

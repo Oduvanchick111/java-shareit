@@ -1,11 +1,14 @@
 package ru.practicum.shareit.booking.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookingRequestDto;
 import ru.practicum.shareit.booking.dto.BookingResponseDto;
+import ru.practicum.shareit.booking.model.State;
 import ru.practicum.shareit.booking.service.BookingService;
 
 import java.util.List;
@@ -39,7 +42,12 @@ public class BookingController {
                                                  @RequestParam(defaultValue = "ALL") String state,
                                                  @RequestParam(defaultValue = "0") int from,
                                                  @RequestParam(defaultValue = "10") int size) {
-        return bookingService.getAllByUser(userId, state, from, size);
+        try {
+            State bookingState = State.fromString(state);
+            return bookingService.getAllByUser(userId, bookingState, from, size);
+        } catch (IllegalArgumentException e) {
+            throw new ValidationException("Неверный state");
+        }
     }
 
     @GetMapping("/owner")
@@ -47,6 +55,11 @@ public class BookingController {
                                                   @RequestParam(defaultValue = "ALL") String state,
                                                   @RequestParam(defaultValue = "0") int from,
                                                   @RequestParam(defaultValue = "10") int size) {
-        return bookingService.getAllByOwner(userId, state, from, size);
+        try {
+            State bookingState = State.fromString(state);
+            return bookingService.getAllByUser(userId, bookingState, from, size);
+        } catch (IllegalArgumentException e) {
+            throw new ValidationException("Неверный state");
+        }
     }
 }

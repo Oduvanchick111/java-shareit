@@ -3,11 +3,13 @@ package ru.practicum.shareit.user.dto;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Builder
 @Data
+@AllArgsConstructor
 public class UserRequestDtoForUpdate {
     @Email
     @Nullable

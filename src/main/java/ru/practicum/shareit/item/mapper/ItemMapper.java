@@ -13,7 +13,7 @@ import java.util.List;
 @UtilityClass
 public class ItemMapper {
 
-    public static Item toItemDao(ItemRequestDto itemRequestDto, User owner, ItemRequest request) {
+    public Item toItemDao(ItemRequestDto itemRequestDto, User owner, ItemRequest request) {
         return Item.builder()
                 .name(itemRequestDto.getName())
                 .description(itemRequestDto.getDescription())
@@ -24,7 +24,7 @@ public class ItemMapper {
     }
 
 
-    public static ItemResponseDto toItemResponseDto(Item item) {
+    public ItemResponseDto toItemResponseDto(Item item) {
         return ItemResponseDto.builder()
                 .id(item.getId())
                 .name(item.getName())
@@ -34,7 +34,7 @@ public class ItemMapper {
                 .build();
     }
 
-    public static ItemRequestDto toItemRequestDto(Item item) {
+    public ItemRequestDto toItemRequestDto(Item item) {
         return ItemRequestDto.builder()
                 .id(item.getId())
                 .name(item.getName())
@@ -45,7 +45,7 @@ public class ItemMapper {
                 .build();
     }
 
-    public static ItemResponseDto toDtoWithComments(Item item, List<CommentDto> comments) {
+    public ItemResponseDto toDtoWithComments(Item item, List<CommentDto> comments) {
         ItemResponseDto dto = toItemResponseDto(item);
         dto.setComments(comments);
         return dto;

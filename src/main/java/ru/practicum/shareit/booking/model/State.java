@@ -7,4 +7,12 @@ public enum State {
     FUTURE,
     WAITING,
     REJECTED;
+
+    public static State fromString(String state) {
+        try {
+            return State.valueOf(state.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Неизвестный статус: " + state);
+        }
+    }
 }
