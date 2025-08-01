@@ -41,12 +41,8 @@ public class BookingController {
                                                  @RequestParam(defaultValue = "ALL") String state,
                                                  @RequestParam(defaultValue = "0") int from,
                                                  @RequestParam(defaultValue = "10") int size) {
-        try {
-            State bookingState = State.fromString(state);
-            return bookingService.getAllByUser(userId, bookingState, from, size);
-        } catch (IllegalArgumentException e) {
-            throw new ValidationException("Неверный state");
-        }
+        State bookingState = State.fromString(state);
+        return bookingService.getAllByUser(userId, bookingState, from, size);
     }
 
     @GetMapping("/owner")
@@ -54,11 +50,7 @@ public class BookingController {
                                                   @RequestParam(defaultValue = "ALL") String state,
                                                   @RequestParam(defaultValue = "0") int from,
                                                   @RequestParam(defaultValue = "10") int size) {
-        try {
-            State bookingState = State.fromString(state);
-            return bookingService.getAllByUser(userId, bookingState, from, size);
-        } catch (IllegalArgumentException e) {
-            throw new ValidationException("Неверный state");
-        }
+        State bookingState = State.fromString(state);
+        return bookingService.getAllByUser(userId, bookingState, from, size);
     }
 }
