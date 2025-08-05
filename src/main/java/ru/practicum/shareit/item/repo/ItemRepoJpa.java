@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface ItemRepoJpa extends JpaRepository<Item, Long> {
     Collection<Item> findByOwnerIdOrderByIdAsc(Long ownerId);
@@ -15,4 +16,6 @@ public interface ItemRepoJpa extends JpaRepository<Item, Long> {
             "OR LOWER(i.description) LIKE LOWER(concat('%', :text, '%'))) " +
             "AND i.available = true")
     Collection<Item> getItemOnText(@Param("text") String text);
+
+    List<Item> findAllByRequestId(Long requestId);
 }
