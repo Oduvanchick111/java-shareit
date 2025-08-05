@@ -9,6 +9,7 @@ import lombok.Data;
 @Builder
 @Data
 public class ItemRequestDto {
+    private Long id;
     @NotBlank
     @Size(max = 200)
     private String name;

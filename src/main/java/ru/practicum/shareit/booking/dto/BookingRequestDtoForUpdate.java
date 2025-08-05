@@ -1,29 +1,29 @@
 package ru.practicum.shareit.booking.dto;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
-import ru.practicum.shareit.booking.Status;
+import ru.practicum.shareit.booking.model.Status;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+@Builder
 @Data
-public class BookingDto {
-    @NotNull
+public class BookingRequestDtoForUpdate {
+    @Nullable
     private Long id;
-    @NotNull
+    @Nullable
     @FutureOrPresent
-    private LocalDate start;
-    @NotNull
+    private LocalDateTime start;
+    @Nullable
     @Future
-    private LocalDate end;
-    @NotNull
+    private LocalDateTime end;
+    @Nullable
     private Long itemId;
-    @NotNull
-    private Long bookerId;
-    @NotNull
+    @Nullable
     private Status status;
 
     @AssertTrue(message = "Дата окончания должна быть позже даты начала")

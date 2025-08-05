@@ -5,30 +5,37 @@ import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.user.dto.UserRequestDto;
 import ru.practicum.shareit.user.dto.UserRequestDtoForUpdate;
 import ru.practicum.shareit.user.dto.UserResponseDto;
-import ru.practicum.shareit.user.model.UserDao;
+import ru.practicum.shareit.user.model.User;
 
 
 @UtilityClass
 public class UserMapper {
-    public static UserResponseDto toUserResponseDto(UserDao userDao) {
+    public UserResponseDto toUserResponseDto(User user) {
         return UserResponseDto.builder()
-                .id(userDao.getId())
-                .email(userDao.getEmail())
-                .name(userDao.getName())
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getName())
                 .build();
     }
 
-    public static UserDao toUserDao(UserRequestDto userDto) {
-        return UserDao.builder()
+    public User toUserDao(UserRequestDto userDto) {
+        return User.builder()
                 .email(userDto.getEmail())
                 .name(userDto.getName())
                 .build();
     }
 
-    public static UserDao toUserDaoUpdate(UserRequestDtoForUpdate userDto) {
-        return UserDao.builder()
+    public User toUserDaoUpdate(UserRequestDtoForUpdate userDto) {
+        return User.builder()
                 .email(userDto.getEmail())
                 .name(userDto.getName())
+                .build();
+    }
+
+    public UserRequestDto toUserRequestDto(User user) {
+        return UserRequestDto.builder()
+                .email(user.getEmail())
+                .name(user.getName())
                 .build();
     }
 }
