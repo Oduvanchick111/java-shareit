@@ -40,7 +40,7 @@ public class RequestMapper {
     }
 
     public ResponseDtoWithItems toResponseDtoWithItems(ItemRequest itemRequest, List<Item> items) {
-        List <ItemResponseDto> itemsResponse = items.stream().map(ItemMapper::toItemResponseDto).toList();
+        List<ItemResponseDto> itemsResponse = items.stream().map(ItemMapper::toItemResponseDto).toList();
         return ResponseDtoWithItems.builder()
                 .id(itemRequest.getId())
                 .description(itemRequest.getDescription())

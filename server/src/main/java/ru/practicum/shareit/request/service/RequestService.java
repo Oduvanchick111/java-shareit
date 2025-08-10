@@ -1,7 +1,6 @@
 package ru.practicum.shareit.request.service;
 
 import ru.practicum.shareit.request.dto.CreateItemRequestDto;
-import ru.practicum.shareit.request.dto.RequestDto;
 import ru.practicum.shareit.request.dto.ResponseDto;
 import ru.practicum.shareit.request.dto.ResponseDtoWithItems;
 

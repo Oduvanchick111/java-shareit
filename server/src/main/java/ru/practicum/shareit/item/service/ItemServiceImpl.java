@@ -44,7 +44,7 @@ public class ItemServiceImpl implements ItemService {
         ItemRequest request = null;
         if (itemRequestDto.getRequestId() != null) {
             request = itemRequestRepository.findById(itemRequestDto.getRequestId())
-                    .orElseThrow(()-> new NotFoundException(String.format("Реквест с id=%d не найден", itemRequestDto.getRequestId())));
+                    .orElseThrow(() -> new NotFoundException(String.format("Реквест с id=%d не найден", itemRequestDto.getRequestId())));
         }
         Item item = ItemMapper.toItemDao(itemRequestDto, owner, request);
         Item savedItem = itemRepo.save(item);
