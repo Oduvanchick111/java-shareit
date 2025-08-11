@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
         @AssertTrue(message = "Дата окончания должна быть позже даты начала")
         public boolean isEndAfterStart() {
             if (start == null || end == null) {
-                return true;
+                return false;
             }
             return end.isAfter(start);
         }
