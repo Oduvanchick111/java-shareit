@@ -26,13 +26,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BookingServiceImpl implements BookingService {
     private final UserRepoJpa userRepository;
     private final ItemRepoJpa itemRepository;
     private final BookingRepoJpa bookingRepository;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public BookingResponseDto create(Long userId, BookingRequestDto bookingDto) {
         User booker = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("Пользователь не найден"));
 
@@ -61,7 +62,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public BookingResponseDto update(Long userId, Long bookingId, boolean approved) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new NotFoundException("Бронирование не найдено"));

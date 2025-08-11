@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.stream.Collectors;
+
 @RestControllerAdvice
 public class ErrorHandler {
     @ExceptionHandler(NotFoundException.class)
@@ -14,10 +16,19 @@ public class ErrorHandler {
         return new ErrorResponse("Объект не найден", exception.getMessage());
     }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class, ValidateException.class})
+    @ExceptionHandler({ValidateException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidateException(final ValidateException exception) {
         return new ErrorResponse("Ошибка валидации", exception.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
+        String errorMessage = e.getBindingResult().getFieldErrors().stream()
+                .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+                .collect(Collectors.joining(", "));
+        return new ErrorResponse("Ошибка валидации", errorMessage);
     }
 
     @ExceptionHandler(EmailAlreadyExistsException.class)
@@ -31,4 +42,5 @@ public class ErrorHandler {
     public ErrorResponse handleInternalServerError(final Throwable throwable) {
         return new ErrorResponse("Ошибка сервера", throwable.getMessage());
     }
+
 }

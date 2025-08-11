@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepoJpa itemRepo;
@@ -39,6 +40,7 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRequestRepository itemRequestRepository;
 
     @Override
+    @Transactional(readOnly = false)
     public ItemResponseDto saveItem(Long userId, ItemRequestDto itemRequestDto) {
         User owner = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("Такого пользователя не существует"));
         ItemRequest request = null;
@@ -52,7 +54,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public ItemResponseDto updateItem(Long userId, Long itemId, ItemRequestForUpdateDto itemUpdateDto) {
         User owner = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("Такого пользователя не существует"));
         Item item = itemRepo.findById(itemId).orElseThrow(() -> new NotFoundException("Предмет не найден"));
@@ -120,11 +122,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void deleteAllItems() {
         itemRepo.deleteAll();
     }
 
     @Override
+    @Transactional(readOnly = false)
     public CommentDto addComment(Long userId, Long itemId, CommentDto commentDto) {
         User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("Пользователь не найдн"));
         Item item = itemRepo.findById(itemId).orElseThrow(() -> new NotFoundException("Товар не найден"));

@@ -1,5 +1,7 @@
 package ru.practicum.shareit.booking.model;
 
+import ru.practicum.shareit.exceptions.ValidateException;
+
 public enum State {
     ALL,
     CURRENT,
@@ -12,7 +14,7 @@ public enum State {
         try {
             return State.valueOf(state.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Неизвестный статус: " + state);
+            throw new ValidateException("Неизвестный статус: " + state);
         }
     }
 }
