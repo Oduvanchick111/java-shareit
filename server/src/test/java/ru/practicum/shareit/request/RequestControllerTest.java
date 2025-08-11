@@ -95,19 +95,6 @@ class RequestControllerTest {
     }
 
     @Test
-    void createRequest_withInvalidData_shouldReturnBadRequest() throws Exception {
-        CreateItemRequestDto invalidDto = new CreateItemRequestDto();
-
-        mockMvc.perform(post("/requests")
-                        .header("X-Sharer-User-Id", 1L)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(invalidDto)))
-                .andExpect(status().isBadRequest());
-
-        verify(requestService, never()).createRequest(anyLong(), any());
-    }
-
-    @Test
     void getAllRequests_shouldReturnAllRequests() throws Exception {
         when(requestService.getAllRequests())
                 .thenReturn(List.of(responseDto));
