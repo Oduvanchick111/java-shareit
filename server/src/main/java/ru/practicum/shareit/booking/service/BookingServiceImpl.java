@@ -33,7 +33,7 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepoJpa bookingRepository;
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public BookingResponseDto create(Long userId, BookingRequestDto bookingDto) {
         User booker = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("Пользователь не найден"));
 
@@ -62,7 +62,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public BookingResponseDto update(Long userId, Long bookingId, boolean approved) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new NotFoundException("Бронирование не найдено"));

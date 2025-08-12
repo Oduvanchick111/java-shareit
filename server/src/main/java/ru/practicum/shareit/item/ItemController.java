@@ -22,12 +22,12 @@ public class ItemController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemResponseDto addItem(@RequestHeader(X_SHARER_USER_ID_HEADER) Long userId, @Valid @RequestBody ItemRequestDto itemRequestDto) {
+    public ItemResponseDto addItem(@RequestHeader(X_SHARER_USER_ID_HEADER) Long userId, @RequestBody ItemRequestDto itemRequestDto) {
         return itemService.saveItem(userId, itemRequestDto);
     }
 
     @PatchMapping("/{itemId}")
-    public ItemResponseDto updateItem(@RequestHeader(X_SHARER_USER_ID_HEADER) Long ownerId, @PathVariable Long itemId, @Valid @RequestBody ItemRequestForUpdateDto item) {
+    public ItemResponseDto updateItem(@RequestHeader(X_SHARER_USER_ID_HEADER) Long ownerId, @PathVariable Long itemId, @RequestBody ItemRequestForUpdateDto item) {
         return itemService.updateItem(ownerId, itemId, item);
     }
 

@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public UserResponseDto saveUser(UserRequestDto userDto) {
         User user = UserMapper.toUserDao(userDto);
         User savedUser = repository.save(user);
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public UserResponseDto updateUser(Long userId, UserRequestDtoForUpdate userRequestDtoForUpdate) {
         User existingUser = repository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Юзер с id: %d не найден", userId)));
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public void deleteUser(Long userId) {
         User existingUser = repository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Юзер с id: %d не найден", userId)));
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public void deleteAllUsers() {
         repository.deleteAll();
     }

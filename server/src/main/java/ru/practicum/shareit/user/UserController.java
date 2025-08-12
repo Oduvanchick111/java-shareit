@@ -25,7 +25,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDto saveNewUser(@Valid @RequestBody UserRequestDto user) {
+    public UserResponseDto saveNewUser(@RequestBody UserRequestDto user) {
         return userService.saveUser(user);
     }
 
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
-    public UserResponseDto updateUser(@PathVariable Long userId, @Valid @RequestBody UserRequestDtoForUpdate userRequestDtoForUpdate) {
+    public UserResponseDto updateUser(@PathVariable Long userId, @RequestBody UserRequestDtoForUpdate userRequestDtoForUpdate) {
         return userService.updateUser(userId, userRequestDtoForUpdate);
     }
 

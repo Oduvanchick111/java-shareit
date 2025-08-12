@@ -82,18 +82,6 @@ class UserControllerTest {
     }
 
     @Test
-    void saveNewUser_withInvalidData_shouldReturnBadRequest() throws Exception {
-        UserRequestDto invalidDto = new UserRequestDto(); // Пустой объект
-
-        mockMvc.perform(post("/users")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(invalidDto)))
-                .andExpect(status().isBadRequest());
-
-        verify(userService, never()).saveUser(any());
-    }
-
-    @Test
     void deleteUser_shouldCallService() throws Exception {
         doNothing().when(userService).deleteUser(anyLong());
 

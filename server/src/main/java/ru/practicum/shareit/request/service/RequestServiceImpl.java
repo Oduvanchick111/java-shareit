@@ -26,7 +26,7 @@ public class RequestServiceImpl implements RequestService {
     private final ItemRequestRepository requestRepository;
     private final ItemRepoJpa itemRepoJpa;
 
-    @Transactional(readOnly = false)
+    @Transactional
     @Override
     public ResponseDto createRequest(Long userId, CreateItemRequestDto requestDto) {
         User user = userRepoJpa.findById(userId).orElseThrow(() -> new NotFoundException("Пользователь не найден"));

@@ -95,23 +95,6 @@ class BookingControllerTest {
     }
 
     @Test
-    void addBooking_withInvalidData_shouldReturnBadRequest() throws Exception {
-        BookingRequestDto invalidDto = BookingRequestDto.builder()
-                .itemId(null)
-                .start(null)
-                .end(null)
-                .build();
-
-        mockMvc.perform(post("/bookings")
-                        .header("X-Sharer-User-Id", 1L)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(invalidDto)))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error").value("Ошибка валидации"))
-                .andDo(print());
-    }
-
-    @Test
     void update_approveBooking_shouldUpdateStatus() throws Exception {
         when(bookingService.update(anyLong(), anyLong(), anyBoolean()))
                 .thenReturn(bookingResponseDto);

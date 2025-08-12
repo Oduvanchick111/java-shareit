@@ -1,5 +1,6 @@
 package ru.practicum.shareit.booking;
 
+import jakarta.validation.constraints.Min;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -40,8 +41,8 @@ public class BookingController {
     @GetMapping
     public ResponseEntity<Object> getAllByUser(@RequestHeader(USERID) Long userId,
                                                @RequestParam(defaultValue = "ALL") String state,
-                                               @RequestParam(defaultValue = "0") int from,
-                                               @RequestParam(defaultValue = "10") int size) {
+                                               @RequestParam(defaultValue = "0") @Min(0) int from,
+                                               @RequestParam(defaultValue = "10") @Min(1) int size) {
         State bookingState = State.fromString(state);
         return bookingClient.getAllByUser(userId, bookingState, from, size);
     }
@@ -49,8 +50,8 @@ public class BookingController {
     @GetMapping("/owner")
     public ResponseEntity<Object> getAllByOwner(@RequestHeader(USERID) Long userId,
                                                 @RequestParam(defaultValue = "ALL") String state,
-                                                @RequestParam(defaultValue = "0") int from,
-                                                @RequestParam(defaultValue = "10") int size) {
+                                                @RequestParam(defaultValue = "0") @Min(0) int from,
+                                                @RequestParam(defaultValue = "10") @Min(1) int size) {
         State bookingState = State.fromString(state);
         return bookingClient.getAllByOwner(userId, bookingState, from, size);
     }

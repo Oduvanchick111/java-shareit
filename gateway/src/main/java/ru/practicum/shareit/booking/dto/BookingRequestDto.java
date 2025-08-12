@@ -11,22 +11,22 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Builder
-    @Data
-    public class BookingRequestDto {
-        @NotNull
-        @FutureOrPresent
-        private LocalDateTime start;
-        @NotNull
-        @Future
-        private LocalDateTime end;
-        @NotNull
-        private Long itemId;
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
+public class BookingRequestDto {
+    @NotNull
+    @FutureOrPresent
+    private LocalDateTime start;
+    @NotNull
+    @Future
+    private LocalDateTime end;
+    @NotNull
+    private Long itemId;
 
-        @AssertTrue(message = "Дата окончания должна быть позже даты начала")
-        private boolean isEndAfterStart() {
-            return end.isAfter(start);
-        }
+    @AssertTrue(message = "Дата окончания должна быть позже даты начала")
+    private boolean isEndAfterStart() {
+        return end.isAfter(start);
     }
+}
